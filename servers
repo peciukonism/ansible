@@ -1,2 +1,9 @@
-192.168.122.234 apache_pack=apache2 php_pack=libapache2-mod-php
-192.168.122.221 apache_pack=httpd php_pack=php
+[web_servers]
+192.168.122.234
+192.168.122.221
+
+[db_servers]
+192.168.122.234
+
+[file_servers]
+192.168.122.234
