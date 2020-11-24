@@ -55,7 +55,22 @@
         - php
       state: latest
     when: ansible_distribution == "CentOS"
-  
+
+  - name: start httpd (For CentOS)
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"  
+
+  - name: restart httpd (For CentOS)
+    tags: restart_httpd
+    service:
+      name: httpd
+      state: restarted
+    when: ansible_distribution == "CentOS"
+
   - name: copy an html file for site
     tags: apache,apache2,httpd
     copy:
