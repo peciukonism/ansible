@@ -1,0 +1,5 @@
+- name: install samba package (fits both servers of the group)
+  tags: samba
+  package:
+    name: samba
+    state: latest
