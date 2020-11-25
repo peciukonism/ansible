@@ -1,39 +1,20 @@
-- name: install apache with php on ubuntu
-  tags: apache,apache2,ubuntu
+- name: install apache with php
+  tags: apache,httpd,php
   package: 
     name:
-      - apache2
-      - libapache2-mod-php
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
-  when: ansible_distribution == "Ubuntu"
 
-- name: install httpd with php on centos
-  tags: apache,apache2,centos
-  dnf:
-    name:
-      - httpd
-      - php
-    state: latest
-  when: ansible_distribution == "CentOS"
-
-- name: start httpd (For CentOS)
-  tags: apache,centos,httpd
+- name: start and enable apache service
+  tags: apache,httpd
   service:
-    name: httpd
+    name: "{{ apache_service }}"
     state: started
     enabled: yes
-  when: ansible_distribution == "CentOS"  
-
-- name: start and enable httpd (For CentOS)
-  tags: restart_httpd
-  service:
-    name: httpd
-    state: started
-    enabled: yes
-  when: ansible_distribution == "CentOS"
 
 - name: copy an html file for site
-  tags: apache,apache2,httpd
+  tags: apache,httpd
   copy:
     src: default_site.html
     dest: /var/www/html/index.html
